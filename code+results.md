@@ -8,21 +8,22 @@
 <br>  
 2:K=1.5,F=1,N=4
 ![](https://github.com/wendy1997ss/Wendy-s-Pyramid/blob/master/2.png)  
-<br> 
+<br>  
 3:K=1,F=0.1,N=4
 ![](https://github.com/wendy1997ss/Wendy-s-Pyramid/blob/master/3.png)
-<br> 
+<br>   
 4:K=1,F=0.5,N=4
 ![](https://github.com/wendy1997ss/Wendy-s-Pyramid/blob/master/4.png)
-<br> 
+<br>   
 5:K=1,F=1,N=4
 ![](https://github.com/wendy1997ss/Wendy-s-Pyramid/blob/master/5.png)
-<br> 
+<br>   
 6:K=1,F=1,N=6
 ![](https://github.com/wendy1997ss/Wendy-s-Pyramid/blob/master/6.png)
-<br> 
+<br>   
 7:K=2,F=1,N=4
 ![](https://github.com/wendy1997ss/Wendy-s-Pyramid/blob/master/7.png)
-<br> 
+<br>   
+
 
 
