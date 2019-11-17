@@ -1,0 +1,121 @@
+# -*- coding: UTF-8 -*-
+import turtle as t
+import random
+
+
+def set_screen(k, S, F, N):
+    t.setup(4.5 * S, 2.5 * k * S)
+    t.up()
+    t.hideturtle()
+    t.pensize(3)
+    t.colormode(255)
+    t.goto(-1.9 * S, 0.65 * k * S)
+    t.write("k=%s" % (str(k)) + " F=%s" % (str(F)) + " N=%s" % (str(N)), False, font=('arial', 19, 'normal'))
+    t.up()
+
+
+def draw_line(x1, y1, x2, y2):
+    t.up()
+    t.goto(x1, y1)
+    t.pd()
+    t.goto(x2, y2)
+    t.up()
+
+
+def draw_T(x, y, l):
+    line_a = [[x - l, y], [x + l, y]]
+    line_b = [[x - l, y], [x, y - k * l]]
+    line_c = [[x + l, y], [x, y - k * l]]
+    t.pencolor([random.randint(0, 255) for i in range(3)])  
+    draw_line(line_a[0][0], line_a[0][1], line_a[1][0], line_a[1][1])
+    draw_line(line_b[0][0], line_b[0][1], line_b[1][0], line_b[1][1])
+    draw_line(line_c[0][0], line_c[0][1], line_c[1][0], line_c[1][1])
+
+
+def draw_name(x, y, l, k):  # 绘制Wendy
+    if k > 1:
+        k = 1
+    # 字母W
+    t.color("brown")
+    t.goto(x - 250 * l * F / 250, y + 50 * l * k * F / 250)
+    t.seth(95)
+    t.down()
+    t.goto(x - 225 * l * F / 250, y - 50 * l * k * F / 250)
+    t.goto(x - 200 * l * F / 250, y + 30 * l * k * F / 250)
+    t.goto(x - 175 * l * F / 250, y - 50 * l * k * F / 250)
+    t.goto(x - 150 * l * F / 250, y + 50 * l * k * F / 250)
+    t.up()
+    # 字母e
+    t.color("grey")
+    t.goto(x - 130 * l * F / 250, y - 10 * l * k * F / 250)
+    t.seth(0)
+    t.down()
+    t.fd(72 * l * k * F / 250)
+    t.seth(90)
+    t.circle(36 * l * k * F / 250, 320)
+    t.up()
+    # 字母n
+    t.color("black")
+    t.goto(x - 30 * l * F / 250, y + 30 * l * k * F / 250)
+    t.seth(-90)
+    t.down()
+    t.fd(80 * l * k * F / 250)
+    t.goto(x - 30 * l * F / 250, y - 10 * l * k * F / 250)
+    t.circle(30 * l * k * F / 250, -180)
+    t.fd(-40 * l * k * F / 250)
+    t.up()
+    # 字母d
+    t.color("seagreen")
+    t.goto(x + 70 * l * F / 250, y - 20 * l * k * F / 250)
+    t.seth(-90)
+    t.down()
+    t.circle(35 * l * k * F / 250, -130)
+    t.up()
+    t.goto(x + 70 * l * F / 250, y - 20 * l * k * F / 250)
+    t.seth(-90)
+    t.down()
+    t.circle(35 * l * k * F / 250, 110)
+    t.seth(80)
+    t.fd(100 * l * k * F / 250)
+    t.up()
+    t.fd(-100 * l * k * F / 250)
+    t.seth(-100)
+    t.down()
+    t.circle(5 * l * k * F / 250, 180)
+    t.up()
+    # 字母y
+    t.color("violet")
+    t.goto(x + 170 * l * F / 250, y + 30 * l * k * F / 250)
+    t.seth(-90)
+    t.down()
+    t.fd(40 * l * k * F / 250)
+    t.seth(-40)
+    t.circle(40 * l * k * F / 250, 80)
+    t.seth(90)
+    t.fd(40 * l * k * F / 250)
+    t.fd(-80 * l * k * F / 250)
+    t.seth(40)
+    t.circle(40 * l * k * F / 250, -80)
+    t.up()
+
+
+def triangle(n, x, y, l):
+    if n == 0: return  
+    draw_T(x, y, l)  
+    draw_name(x, y - k * l / 4, l / 2, k=k)
+    triangle(n - 1, x, y + k * l / 2, l / 2)  # 每个三角形拆成四部分，其中三部分进行下一次迭代。
+    triangle(n - 1, x - l, y - k * l / 2, l / 2)
+    triangle(n - 1, x + l, y - k * l / 2, l / 2)
+
+
+if __name__ == '__main__':
+    k = 1  # 坡度
+    S = 200  # 整体图形大小
+    F = 1  # 字母填充度
+    N = 4  # 迭代次数
+    set_screen(k, S, F, N)
+    t.tracer(False)
+    triangle(N, 0, 0, S)  # 输入变量为(N,x,y,S)，(x,y)为初始坐标，默认为(0,0)
+    ts = t.getscreen()
+    ts.getcanvas().postscript(file="k%s_F%s_N%s.eps" % (str(k), str(F), (str(N))))
+    t.done()
